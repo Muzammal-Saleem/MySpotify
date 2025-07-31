@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Spotify - Web Player: Music for everyone</title>
+    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+  </head>
+  <body class="m-0 p-0 h-screen bg-black">
+    <!-- mobile Sidebar Overlay -->
+    <div id="sidebarOverlay" class="sidebar-overlay hidden md:hidden"></div>
+
+    <div class="flex gap-2 bg-black p-2 text-white w-full h-full">
+      <!-- Left Sidebar -->
+      <div
+        id="sidebar"
+        class="left sidebar-mobile md:sidebar-desktop w-full md:w-1/3 h-full overflow-y-auto flex flex-col bg-black md:bg-transparent"
+      >
+        <div class="home p-2 pl-4 mb-2 bg-neutral-950 rounded-md">
+          <div
+            class="logo p-2 mb-1 text-white font-bold text-lg flex items-center justify-between"
+          >
+            <div class="scale-125">
+              <i class="fa-brands fa-spotify text-green-500"></i> Spotify
+            </div>
+            <!-- Close button for mobile -->
+            <button
+              id="closeSidebar"
+              class="md:hidden text-white hover:text-gray-300"
+            >
+              <i class="fa-solid fa-times text-lg"></i>
+            </button>
+          </div>
+          <ul class="space-y-1 text-xs">
+            <li
+              class="flex items-center hover:bg-neutral-800 rounded px-2 py-1 cursor-pointer"
+            >
+              <i class="fa-solid fa-house w-3 mr-2"></i>Home
+            </li>
+            <li
+              class="flex items-center hover:bg-neutral-800 rounded px-2 py-1 cursor-pointer"
+            >
+              <i class="fa-solid fa-magnifying-glass w-3 mr-2"></i>Search
+            </li>
+          </ul>
+        </div>
+        <div
+          class="library mt-1 bg-neutral-950 rounded-md flex-1 overflow-hidden flex flex-col"
+        >
+          <div class="heading flex items-center p-4">
+            <img class="invert w-5 mr-3" src="img/playlist.svg" alt="" />
+            <!-- <i class="fa-solid fa-list w-4 mr-3"></i> -->
+            <h2 class="text-sm font-medium">Library</h2>
+          </div>
+          <div class="songlist flex-1 overflow-hidden">
+            <ol
+              class="songlistOl text-white h-full overflow-y-auto custom-scrollbar px-2"
+            >
+              <!-- Sample library items -->
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Main Content -->
+      <div
+        class="right w-full md:w-2/3 h-full rounded-md bg-black overflow-hidden flex flex-col"
+      >
+        <!-- Navigation Bar -->
+        <nav
+          class="flex justify-between items-center p-3 bg-neutral-950 overflow-hidden rounded-md"
+        >
+          <div class="hamburgerContainer flex gap-3 items-center">
+            <button
+              id="hamburgerBtn"
+              class="fa-solid fa-bars text-white w-4 md:hidden hover:text-gray-300 transition-colors"
+            ></button>
+            <button class="hidden md:block">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M15 6L9.70711 11.2929C9.37377 11.6262 9.20711 11.7929 9.20711 12C9.20711 12.2071 9.37377 12.3738 9.70711 12.7071L15 18"
+                  stroke="#ffffff"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+            <button class="hidden md:block">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M9 18L14.2929 12.7071C14.6262 12.3738 14.7929 12.2071 14.7929 12C14.7929 11.7929 14.6262 11.6262 14.2929 11.2929L9 6"
+                  stroke="#ffffff"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            class="buttons flex gap-3 sm:bg-black sm:hover:bg-neutral-900 pl-4 py-1 rounded-3xl"
+          >
+            <button class="signupbtn text-white text-sm hidden sm:block">
+              Sign up
+            </button>
+            <button
+              class="loginbtn text-black font-medium bg-green-600 hover:bg-green-500 px-4 py-2 rounded-3xl transition duration-300 ease-in-out text-sm"
+            >
+              Log in
+            </button>
+          </div>
+        </nav>
+
+        <!-- Playlists Section -->
+        <div
+          class="playlists flex-1 overflow-y-auto custom-scrollbar bg-neutral-900 rounded-md my-2"
+        >
+          <h1 class="p-3 text-xl md:text-2xl font-bold">Spotify Playlists</h1>
+
+          <div
+            class="cardContainer p-3 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4"
+          >
+            <!-- Sample playlist cards -->
+          </div>
+        </div>
+
+        <!-- Music Controls -->
+        <!-- bg-[#1e2525] -->
+        <div
+          class="controls w-full border-t sm:h-auto h-[28vh] border-neutral-800 rounded-md flex flex-col justify-between bg-transparent"
+        >
+          <!-- Progress Bar Row Time + Slider + Duration -->
+          <div
+            class="flex items-center justify-between px-4 py-2 text-sm text-gray-300 min-h-0"
+          >
+            <input
+              id="timeSlider"
+              type="range"
+              value="0"
+              min="0"
+              max="100"
+              class="flex-1 h-1 mx-3 sm:mx-4 accent-green-500 bg-neutral-700 rounded-lg cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:bg-green-500 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:transition-all [&::-webkit-slider-thumb]:duration-300 [&::-webkit-slider-thumb]:hover:scale-125"
+            />
+          </div>
+          <div class="div flex justify-end px-8 sm:my-auto mt-2">
+            <div
+              class="songInfo text-white flex-1 min-w-0 pr-2 overflow-hidden"
+            >
+              <div
+                class="songTitle text-xs sm:text-sm font-semibold truncate pr-7 sm:hidden inline"
+              ></div>
+            </div>
+            <span
+              id="currentTime"
+              class="text-xs sm:text-sm text-left ml-[20%]"
+            ></span>
+            <span id="duration" class="text-xs sm:text-sm text-right"></span>
+          </div>
+
+          <!-- Music Controls -->
+          <div
+            class="musicControl flex-1 flex sm:flex-row flex-col-reverse items-center justify-between px-4 sm:py-2 pb-[3rem] min-h-0"
+          >
+            <!-- Current Song Info -->
+
+            <div
+              class="songInfo text-white flex-1 min-w-0 pr-12 overflow-hidden"
+            >
+              <div
+                class="songTitle text-xs sm:text-sm font-semibold truncate hidden sm:block"
+              ></div>
+            </div>
+
+            <!-- Centered Song Control Buttons -->
+            <div
+              class="nevigators flex justify-center items-center flex-shrink-0 gap-3 sm:gap-4"
+            >
+              <i
+                id="previous"
+                class="fa-solid fa-backward-step text-2xl sm:text-lg text-gray-300 hover:text-white cursor-pointer transition-all duration-200 hover:scale-110"
+              ></i>
+              <div
+                class="bg-white rounded-full w-16 h-16 sm:w-10 sm:h-10 hover:scale-110 sm:scale-100 scale-200 transition-transform duration-300 flex justify-center items-center cursor-pointer"
+              >
+                <i
+                  id="play"
+                  class="fa-solid fa-play text-black text-2xl sm:text-base"
+                ></i>
+              </div>
+              <i
+                id="next"
+                class="fa-solid fa-forward-step text-2xl sm:text-lg text-gray-300 hover:text-white cursor-pointer transition-all duration-200 hover:scale-110"
+              ></i>
+            </div>
+
+            <!-- Volume Control -->
+            <div
+              class="flex sm:mb-auto mb-2 items-center gap-1 sm:gap-2 flex-1 justify-end sm:px-4 min-w-0 w-full px-2"
+            >
+              <div
+                id="volumeIcon"
+                class="cursor-pointer sm:block text-gray-300 hover:text-white transition-colors"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 sm:h-6 sm:w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M11 5L6 9H3v6h3l5 4V5z"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15.54 8.46a5 5 0 010 7.07"
+                  />
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19.07 4.93a9 9 0 010 14.14"
+                  />
+                </svg>
+              </div>
+              <input
+                id="soundSlider"
+                type="range"
+                min="0"
+                max="100"
+                value="50"
+                class="w-16 sm:w-24 h-1 accent-gray-300 bg-neutral-700 rounded-lg cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:transition-all [&::-webkit-slider-thumb]:duration-300 [&::-webkit-slider-thumb]:hover:scale-110"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./javascript/script.js"></script>
+  </body>
+</html>
