@@ -6,7 +6,8 @@ let songs = [];
 let isPlayAble = false;
 
 async function getFolders() {
-  let a = await fetch("/songs/");
+  // Fixed: Use relative path with repository name
+  let a = await fetch("./songs/");
 
   let response = await a.text();
   let div = document.createElement("div");
@@ -19,9 +20,8 @@ async function getFolders() {
     if (element.href.includes("/songs/")) {
       let folder = element.href.split("/").slice(-1)[0];
 
-      let a = await fetch(
-        `/songs/${folder}/info.json`
-      );
+      // Fixed: Use relative path
+      let a = await fetch(`./songs/${folder}/info.json`);
       let cardJson = await a.json();
 
       const card = document.createElement("div");
@@ -32,9 +32,9 @@ async function getFolders() {
       const imageWrapper = document.createElement("div");
       imageWrapper.className = "relative aspect-square mb-3";
 
-      // Image (cover photo)
+      // Fixed: Use relative path instead of localhost
       const gradientBox = document.createElement("img");
-      gradientBox.src = `http://192.168.100.11:5501/src/songs/${folder}/cover.jpg`;
+      gradientBox.src = `./songs/${folder}/cover.jpg`;
       gradientBox.className = "w-full h-full object-cover rounded-md";
 
       // Play button
@@ -83,7 +83,8 @@ async function getFolders() {
 }
 
 async function getSongs(folder) {
-  let a = await fetch(`/MySpotify/songs/${folder}`);
+  // Fixed: Use relative path without repository name repetition
+  let a = await fetch(`./songs/${folder}/`);
   let responce = await a.text();
 
   let div = document.createElement("div");
