@@ -7,7 +7,7 @@ let isPlayAble = false;
 
 async function getFolders() {
   // Fixed: Use relative path with repository name
-  let a = await fetch("https://api.github.com/repos/Muzammal-Saleem/MySpotify/songs");
+  let a = await fetch("../songs/");
 
   let response = await a.text();
   let div = document.createElement("div");
