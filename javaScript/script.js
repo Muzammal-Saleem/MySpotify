@@ -6,7 +6,7 @@ let songs = [];
 let isPlayAble = false;
 
 async function getFolders() {
-  let a = await fetch("/MySpotify/songs/");
+  let a = await fetch("/songs/");
 
   let response = await a.text();
   let div = document.createElement("div");
@@ -20,7 +20,7 @@ async function getFolders() {
       let folder = element.href.split("/").slice(-1)[0];
 
       let a = await fetch(
-        `/MySpotify/songs/${folder}/info.json`
+        `/songs/${folder}/info.json`
       );
       let cardJson = await a.json();
 
